@@ -22,8 +22,8 @@ x = np.linspace(-1, 1, 200, dtype=np.float32)   # x data
 # Test (1): Visualize a simple linear function with two parameters,
 # you can change LR to 1 to see the different pattern in gradient descent.
 
-# y_fun = lambda a, b: a * x + b
-# tf_y_fun = lambda a, b: a * x + b
+y_fun = lambda a, b: a * x + b
+tf_y_fun = lambda a, b: a * x + b
 
 
 # Test (2): Using Tensorflow as a calibrating tool for empirical formula like following.
@@ -35,8 +35,8 @@ x = np.linspace(-1, 1, 200, dtype=np.float32)   # x data
 # Test (3): Most simplest two parameters and two layers Neural Net, and their local & global minimum,
 # you can try different INIT_PARAMS set to visualize the gradient descent.
 
-y_fun = lambda a, b: np.sin(b*np.cos(a*x))
-tf_y_fun = lambda a, b: tf.sin(b*tf.cos(a*x))
+# y_fun = lambda a, b: np.sin(b*np.cos(a*x))
+# tf_y_fun = lambda a, b: tf.sin(b*tf.cos(a*x))
 
 noise = np.random.randn(200)/10
 y = y_fun(*REAL_PARAMS) + noise         # target
