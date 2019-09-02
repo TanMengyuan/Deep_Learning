@@ -22,6 +22,7 @@ yt = np.linspace(0 + 0.25, 5 - 0.25, 10)
 # print('xt\n', xt, '\nyt\n', yt)
 count = 0
 
+
 def plotting(x, y, z):
     fig = plt.figure()
     ax = Axes3D(fig)
@@ -32,12 +33,13 @@ def plotting(x, y, z):
     ax.set_zlim(-300, 1300)
     plt.show()
 
+
 for i in range(len(xt)):
     for j in range(len(yt)):
         count += 1
-        d = np.sqrt(np.square(xr - xt[i]) + np.square(yr- yt[j]) + np.square(htr))
+        d = np.sqrt(np.square(xr - xt[i]) + np.square(yr - yt[j]) + np.square(htr))
         cosTetha = htr / d
         E = (I0 * cosTetha * np.cos(np.deg2rad(tetha)) ** m) / np.square(d)
-        np.save(r'E_value_data/E_value_%s.npy' % (str(i) + str(j)) , E.T)
+        np.save(r'E_value_data/E_value_%s.npy' % (str(i) + str(j)), E.T)
 
 print('Finish.')

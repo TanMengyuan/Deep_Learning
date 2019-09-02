@@ -25,6 +25,7 @@ biases = {
     'out': tf.Variable(tf.constant(0.1, shape=[n_classes, ]))
 }
 
+
 def RNN(X, weights, biases):
     # hidden layer for input to cell
     X = tf.reshape(X, [-1, n_inputs])
@@ -39,7 +40,6 @@ def RNN(X, weights, biases):
 
     # hidden layer for output as the final results
     results = tf.matmul(states[1], weights['out'] + biases['out'])
-
 
     return results
 

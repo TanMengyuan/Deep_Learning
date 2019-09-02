@@ -9,7 +9,7 @@ hparams_justify = 1
 
 plt.figure(figsize=(12, 6))  # set the figure size
 ROOM_SIZE = np.array([10, 10])
-DNA_SIZE = ROOM_SIZE[0] * ROOM_SIZE[1]            # DNA length
+DNA_SIZE = ROOM_SIZE[0] * ROOM_SIZE[1]  # DNA length
 dimX, dimY, dimZ, REC_HEIGHT = 5, 5, 3, 0.85
 ngx, ngy = dimX * 10, dimY * 10
 ht, hr = dimZ, REC_HEIGHT
@@ -20,15 +20,15 @@ xr, yr = np.meshgrid(x, y)
 xt = np.linspace(0 + 0.25, 5 - 0.25, 10)
 yt = np.linspace(0 + 0.25, 5 - 0.25, 10)
 
-c = 3e8 # m/s
+c = 3e8  # m/s
 nLed = 60
 # nLed = 60
-Pt = 0.02 # W
+Pt = 0.02  # W
 Pt *= nLed * nLed
-gamma = 0.53 # A/W
+gamma = 0.53  # A/W
 # data_rate = 2000 * 1e6 # b/s
-data_rate = 10 * 1e6 # b/s
-T = 1 / data_rate # s
+data_rate = 10 * 1e6  # b/s
+T = 1 / data_rate  # s
 T_half = T / 2
 
 noise_value_data, t_value_data, Hn_value_data = np.array([]), np.array([]), np.array([])
@@ -38,23 +38,24 @@ E_value_data = np.array([])
 for i in range(ROOM_SIZE[0]):
     for j in range(ROOM_SIZE[1]):
         E_value_data = np.append(E_value_data,
-                                     np.load(r'E_value_data_onetime_reflection/E_value_%s.npy' % (str(i) + str(j))))
+                                 np.load(r'E_value_data_onetime_reflection/E_value_%s.npy' % (str(i) + str(j))))
         noise_value_data = np.append(noise_value_data,
-                                 np.load(r'noise_value_data/noise_value_%s.npy' % (str(i) + str(j))))
+                                     np.load(r'noise_value_data/noise_value_%s.npy' % (str(i) + str(j))))
         t_value_data = np.append(t_value_data,
-                                     np.load(r't_value_data/t_value_%s.npy' % (str(i) + str(j))))
+                                 np.load(r't_value_data/t_value_%s.npy' % (str(i) + str(j))))
         Hn_value_data = np.append(Hn_value_data,
-                                 np.load(r'Hn_value_data/Hn_value_%s.npy' % (str(i) + str(j))))
+                                  np.load(r'Hn_value_data/Hn_value_%s.npy' % (str(i) + str(j))))
         n_shot_noise_value_data = np.append(n_shot_noise_value_data,
-                                     np.load(r'n_shot_value_data/n_shot_value_%s.npy' % (str(i) + str(j))))
+                                            np.load(r'n_shot_value_data/n_shot_value_%s.npy' % (str(i) + str(j))))
         n_thermal_noise_value_data = np.append(n_thermal_noise_value_data,
-                                     np.load(r'n_thermal_value_data/n_thermal_value_%s.npy' % (str(i) + str(j))))
+                                               np.load(
+                                                   r'n_thermal_value_data/n_thermal_value_%s.npy' % (str(i) + str(j))))
         if os.path.isfile(r'ambient_noise_value_data/ambient_noise_value_%s.npy' % (str(i) + str(j))):
             ambient_noise_value_data = np.append(ambient_noise_value_data,
-                                         np.load(r'ambient_noise_value_data/ambient_noise_value_%s.npy' % (str(i) + str(j))))
+                                                 np.load(r'ambient_noise_value_data/ambient_noise_value_%s.npy' % (
+                                                             str(i) + str(j))))
         else:
             ambient_noise_value_data = np.append(ambient_noise_value_data, np.zeros((50, 50)))
-
 
 noise_value_data = noise_value_data.reshape(ROOM_SIZE[0], ROOM_SIZE[1], 50, 50)
 ambient_noise_value_data = ambient_noise_value_data.reshape(ROOM_SIZE[0], ROOM_SIZE[1], 50, 50)
@@ -126,7 +127,6 @@ def plotting(DNA, id_num):
         # N += n_thermal_noise_value_data[xt[k]][yt[k]] + n_shot_noise_value_data[xt[k]][yt[k]] * hparams_justify
         N += 0.1 * (gamma ** 2) * (Prs ** 2)
 
-
     SNR = 10 * np.log10(S / N) * room_mut
     print('mean SNR', np.mean(SNR))
     print('min SNR ', np.min(SNR[SNR > 0]))
@@ -143,7 +143,6 @@ def plotting(DNA, id_num):
     # plt.contourf(xr, yr, SNR.T, alpha=.75)
     # C = plt.contour(xr, yr, SNR.T, colors='black', linewidths=1)
     # plt.clabel(C, fmt='%.1f', inline=True, fontsize=10)
-
 
     plt.subplot(121)
     levels = np.hstack((np.linspace(np.min(SNR[SNR != 0]), 13.6 - (np.max(SNR) - 13.6) / 3, 3),

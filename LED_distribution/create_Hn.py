@@ -7,7 +7,7 @@ tethaHalf = np.deg2rad(60)
 m = np.int(- np.log(2) / np.log(np.cos(tethaHalf)))
 I0 = 0.73
 FOV = np.deg2rad(60)
-Rho = 0.8   # Spectral reflectance of plaster wall
+Rho = 0.8  # Spectral reflectance of plaster wall
 Ar = 1e-4
 n = 1.5
 nLed = 60
@@ -36,6 +36,7 @@ def plotting(x, y, z):
     plt.pause(0.1)
     # plt.show()
 
+
 for i in range(len(xt)):
     for j in range(len(yt)):
         d = np.sqrt(np.square(xr - xt[i]) + np.square(yr - yt[j]) + np.square(htr))
@@ -43,7 +44,7 @@ for i in range(len(xt)):
         tetha_irr = np.arccos(cosTetha)
         # tetha_irr = (np.pi / 2) - np.arcsin(cosTetha)
         Hn = (Ar * (m + 1) * (np.cos(tetha_irr) ** m) * (np.square(n) /
-            (np.square(np.sin(FOV)))) * np.cos(tetha_irr)) / \
+                                                         (np.square(np.sin(FOV)))) * np.cos(tetha_irr)) / \
              (2 * np.pi * np.square(d))
         Hn[tetha_irr > FOV] = 0
         adding = np.zeros((50, 50))
@@ -82,9 +83,9 @@ for i in range(len(xt)):
                     tmp[tetha_R > FOV] = 0
                     adding += tmp
                     # if i == 3 and j == 3:
-                        # print(tetha_R)
-                        # plotting(xr, yr, tetha_R)
-                        # plotting(xr, yr, tmp)
+                    # print(tetha_R)
+                    # plotting(xr, yr, tetha_R)
+                    # plotting(xr, yr, tmp)
 
         if i == 2 and j == 2:
             print(adding)

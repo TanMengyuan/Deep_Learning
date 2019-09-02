@@ -4,7 +4,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import time
 
 ROOM_SIZE = np.array([10, 10])
-DNA_SIZE = ROOM_SIZE[0] * ROOM_SIZE[1]            # DNA length
+DNA_SIZE = ROOM_SIZE[0] * ROOM_SIZE[1]  # DNA length
 tethaHalf = 60
 m = np.int(- np.log(2) / np.log(np.cos(np.deg2rad(tethaHalf))))
 I0 = 0.73
@@ -39,13 +39,17 @@ room_mut = np.repeat(room, repeat_arr, axis=0)
 room_mut = np.repeat(room_mut, repeat_arr, axis=1)
 room_xx, room_yy = np.where(room == 0)[0] / 2 + 0.25, np.where(room == 0)[1] / 2 + 0.25
 
+
 def Q_fun(Emax, Emin): return 1 - ((Emax - Emin) / Emax)
+
 
 def UIR_fun(Emin, Emean): return Emin / Emean
 
+
 def LED_fun(cur, tar): return np.abs(cur - tar)
 
-def F(source):    # source shape [-1, 100]
+
+def F(source):  # source shape [-1, 100]
     source = source.reshape(-1, ROOM_SIZE[0], ROOM_SIZE[1])
     value, value_orig, Lum, led_gap = np.array([]), np.array([]), np.array([]), np.array([])
     for i in range(source.shape[0]):
@@ -73,7 +77,7 @@ def F(source):    # source shape [-1, 100]
         #     Lum = np.append(Lum, 0)
         # led_gap = np.append(led_gap, LED_fun(cur=led, tar=led_num))
         value_orig = np.append(value_orig, UIR_fun(Emin=E_min, Emean=E_avg))
-    value = value_orig# * 0.6
+    value = value_orig  # * 0.6
     # Lum_value = ((Lum - np.min(Lum)) / (np.max(Lum) - np.min(Lum)))
     # value += Lum_value * 0.1
     # value[led_gap != 0] = 0
@@ -89,8 +93,8 @@ def F(source):    # source shape [-1, 100]
     #     print(value)
     # assert False not in (value <= 1)
 
+    return value, value_orig, Lum_value, gap_value  # to find the maximum of this function
 
-    return value, value_orig, Lum_value, gap_value     # to find the maximum of this function
 
 def plotting(DNA, gen):
     plt.cla()
@@ -141,6 +145,7 @@ def plotting(DNA, gen):
     # plt.pause(0.1)
     plt.grid()
     plt.show()
+
 
 dna = np.zeros((1, 100))
 d = 2

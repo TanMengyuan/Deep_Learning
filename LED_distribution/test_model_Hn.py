@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 ROOM_SIZE = np.array([10, 10])
-DNA_SIZE = ROOM_SIZE[0] * ROOM_SIZE[1]            # DNA length
+DNA_SIZE = ROOM_SIZE[0] * ROOM_SIZE[1]  # DNA length
 dimX, dimY, dimZ, REC_HEIGHT = 5, 5, 3, 0.85
 ngx, ngy = dimX * 10, dimY * 10
 ht, hr = dimZ, REC_HEIGHT
@@ -19,8 +19,11 @@ Pt *= nLed * nLed
 for i in range(ROOM_SIZE[0]):
     for j in range(ROOM_SIZE[1]):
         Hn_value_data = np.append(Hn_value_data,
-                                 np.load(r'G:\Python35\workspace\tmy\Deep_Learning\LED_distribution\Hn_value_data\Hn_value_%s.npy' % (str(i) + str(j))))
+                                  np.load(
+                                      r'G:\Python35\workspace\tmy\Deep_Learning\LED_distribution\Hn_value_data\Hn_value_%s.npy' % (
+                                                  str(i) + str(j))))
 Hn_value_data = Hn_value_data.reshape(ROOM_SIZE[0], ROOM_SIZE[1], 50, 50)
+
 
 def plotting(DNA):
     DNA = DNA.reshape(-1, ROOM_SIZE[0], ROOM_SIZE[1])[0]
@@ -49,6 +52,7 @@ def plotting(DNA):
     ax.set_zlabel('Received Power (dBm)')
     ax.set_zlim(-6, 4)
     plt.show()
+
 
 dna = np.zeros((1, 100))
 d = 2

@@ -19,6 +19,7 @@ def set_LED_position(array, loc):
         array[each[0]][each[1]] = 1
     return array
 
+
 def plotting(x, y, z):
     fig = plt.figure()
     ax = Axes3D(fig)
@@ -28,14 +29,17 @@ def plotting(x, y, z):
     ax.set_zlabel('Horizontal Illuminance (lx)')
     plt.show()
 
+
 def UIR_fun(Emin, Emean): return Emin / Emean
 
+
 def Q_fun(Emax, Emin): return 1 - (Emax - Emin) / Emax
+
 
 def F(room, source):
     tetha = 45
     tethaHalf = 60
-    m = np.int( - np.log(2) / np.log(np.cos(np.deg2rad(tethaHalf))))
+    m = np.int(- np.log(2) / np.log(np.cos(np.deg2rad(tethaHalf))))
     I0 = 0.73
     nLed = 60
     dimX, dimY, dimZ, REC_HEIGHT = 5, 5, 3, 0.85

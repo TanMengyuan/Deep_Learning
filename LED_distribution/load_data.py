@@ -10,7 +10,7 @@ from PIL import Image
 id_num = 0
 
 ROOM_SIZE = np.array([10, 10])
-DNA_SIZE = ROOM_SIZE[0] * ROOM_SIZE[1]            # DNA length
+DNA_SIZE = ROOM_SIZE[0] * ROOM_SIZE[1]  # DNA length
 tetha = 45
 tethaHalf = 60
 m = np.int(- np.log(2) / np.log(np.cos(np.deg2rad(tethaHalf))))
@@ -82,9 +82,11 @@ def plotting(DNA, gen):
     # plt.pause(0.1)
     plt.show()
 
+
 def run():
     DNA = np.load('room_result/%s_out.npy' % room_id)
     plotting(DNA, 2000)
+
 
 if __name__ == '__main__':
     run()

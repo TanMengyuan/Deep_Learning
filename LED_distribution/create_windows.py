@@ -5,6 +5,7 @@ from mpl_toolkits.mplot3d import Axes3D
 is_saving = True
 plt.figure(figsize=(6, 6))  # set the figure size
 
+
 def plot_loc(windows, win_id):
     plt.cla()
     room_xx, room_yy = np.where(windows == 1)[0] / 2 + 0.25, np.where(windows == 1)[1] / 2 + 0.25
@@ -16,6 +17,7 @@ def plot_loc(windows, win_id):
     if is_saving:
         plt.savefig("windows_fig/%s.jpg" % win_id)
     plt.pause(0.5)
+
 
 def process_win(mini_win):
     res = np.array([])
@@ -33,6 +35,7 @@ def process_win(mini_win):
 
     return res.reshape(-1, 10, 10)
 
+
 id_num = 0
 for start in range(5):
     win_r = np.zeros((10, 10))
@@ -45,4 +48,5 @@ for start in range(5):
             np.save('windows_data/%s.npy' % room_id, each)
         id_num += 1
 
-plt.ioff(); plt.show()
+plt.ioff();
+plt.show()

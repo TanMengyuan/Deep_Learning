@@ -6,6 +6,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 is_saving = False
 
+
 def plot_loc(room, room_id):
     plt.cla()
     room_xx, room_yy = np.where(room == 0)[0] / 2 + 0.25, np.where(room == 0)[1] / 2 + 0.25
@@ -16,6 +17,7 @@ def plot_loc(room, room_id):
     if is_saving:
         plt.savefig("room_shape_fig/%s.jpg" % room_id)
     plt.pause(0.5)
+
 
 def process_cut(cut):
     # 5 function to cut the room
@@ -28,6 +30,7 @@ def process_cut(cut):
     res = np.append(res, room * cut * np.rot90(cut) * np.rot90(cut, k=2) * np.rot90(cut, k=3))
 
     return res.reshape(-1, 10, 10)
+
 
 rooms = np.array([])
 cut = np.array([])
@@ -58,7 +61,6 @@ for S in range(1, 5):
             cut_each[i][j] = 0
     cut = np.append(cut, cut_each)
 
-
 plt.ion()
 cut = cut.reshape(-1, 10, 10)
 id_num = 0
@@ -70,4 +72,5 @@ for each in cut:
         if is_saving:
             np.save('room_data/%s.npy' % room_id, datum)
         id_num += 1
-plt.ioff(); plt.show()
+plt.ioff();
+plt.show()
