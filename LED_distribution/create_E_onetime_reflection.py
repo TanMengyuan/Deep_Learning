@@ -56,8 +56,8 @@ for i in range(len(xt)):
                     tmp = ((Rho * I0 * d_wall * np.cos(tetha) ** m * np.cos(gamma1) * np.cos(gamma2) * np.cos(
                         tetha_R)) /
                            (2 * (np.pi ** 2) * d1 ** 2 * d2 ** 2))
-                    # tmp = ((Rho * I0 * d_wall * np.cos((np.pi / 2) - gamma1) ** m * np.cos(gamma1) * np.cos(gamma2) * np.cos(tetha_R)) /
-                    #        (2 * (np.pi) * d1 ** 2 * d2 ** 2))
+                    # tmp = ((Rho * I0 * d_wall * np.cos((np.pi / 2) - gamma1) ** m * np.cos(gamma1) * np.cos(gamma2)
+                    # * np.cos(tetha_R)) / (2 * (np.pi) * d1 ** 2 * d2 ** 2))
                     tmp[tetha_R > FOV] = 0
                     adding += tmp
 
@@ -78,11 +78,12 @@ for i in range(len(xt)):
                     tmp[tetha_R > FOV] = 0
                     adding += tmp
 
-        if i == 2 and j == 2:
-            print(adding)
-            print(np.mean(E))
-            print(np.mean(adding))
-            print('{:.2f} %'.format(100 * np.mean(adding) / np.mean(E)))
+        # check data at (2, 2)
+        # if i == 2 and j == 2:
+        #     print(adding)
+        #     print(np.mean(E))
+        #     print(np.mean(adding))
+        #     print('{:.2f} %'.format(100 * np.mean(adding) / np.mean(E)))
 
         E += adding
 
