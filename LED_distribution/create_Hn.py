@@ -1,3 +1,6 @@
+#   2019.02.28 计算Hn时用的辐射角的值等于倾斜角
+#              LED高度2.5m
+
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
@@ -34,7 +37,7 @@ def plotting(x, y, z):
     ax.set_zlabel('DC gain')
     # ax.set_zlim(-300, 1300)
     plt.pause(0.1)
-    # plt.show()
+    plt.show()
 
 
 for i in range(len(xt)):
@@ -60,9 +63,6 @@ for i in range(len(xt)):
                     tmp = (((m + 1) * Ar) / (2 * (np.pi ** 2) * (d1 ** 2) * (d2 ** 2))) * \
                           Rho * d_wall * (np.cos(tetha) ** m) * np.cos(gamma1) * np.cos(gamma2) * \
                           (np.square(n) / (np.square(np.sin(FOV)))) * np.cos(tetha_R)
-                    # tmp = (((m + 1) * Ar) / (2 * (np.pi ** 2) * (d1 ** 2) * (d2 ** 2))) * \
-                    #       Rho * d_wall * (np.cos((np.pi / 2) - gamma1) ** m) * np.cos(gamma1) * np.cos(gamma2) * \
-                    #       (np.square(n) / (np.square(np.sin(FOV)))) * np.cos(tetha_R)
                     tmp[tetha_R > FOV] = 0
                     adding += tmp
 
@@ -77,26 +77,20 @@ for i in range(len(xt)):
                     tmp = (((m + 1) * Ar) / (2 * (np.pi ** 2) * (d1 ** 2) * (d2 ** 2))) * \
                           Rho * d_wall * (np.cos(tetha) ** m) * np.cos(gamma1) * np.cos(gamma2) * \
                           (np.square(n) / (np.square(np.sin(FOV)))) * np.cos(tetha_R)
-                    # tmp = (((m + 1) * Ar) / (2 * (np.pi ** 2) * (d1 ** 2) * (d2 ** 2))) * \
-                    #       Rho * d_wall * (np.cos((np.pi / 2) - gamma1) ** m) * np.cos(gamma1) * np.cos(gamma2) * \
-                    #       (np.square(n) / (np.square(np.sin(FOV)))) * np.cos(tetha_R)
                     tmp[tetha_R > FOV] = 0
                     adding += tmp
-                    # if i == 3 and j == 3:
-                    # print(tetha_R)
-                    # plotting(xr, yr, tetha_R)
-                    # plotting(xr, yr, tmp)
 
-        if i == 2 and j == 2:
-            print(adding)
-            print(np.mean(adding))
-            print(np.mean(Hn))
-            print('{:.2f} %'.format(100 * np.mean(adding) / np.mean(Hn)))
-            # plotting(xr, yr, adding)
+        # Testing part
+        # if i == 2 and j == 2:
+        #     print(adding)
+        #     print(np.mean(adding))
+        #     print(np.mean(Hn))
+        #     print('{:.2f} %'.format(100 * np.mean(adding) / np.mean(Hn)))
+        #     plotting(xr, yr, adding)
+        #
+        # Hn += adding
 
-        Hn += adding
-
-        np.save(r'Hn_value_data/Hn_value_%s.npy' % (str(i) + str(j)), Hn.T)
+        # np.save(r'Hn_value_data/Hn_value_%s.npy' % (str(i) + str(j)), Hn.T)
 
     print('Finish', i)
 
